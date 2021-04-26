@@ -36,6 +36,16 @@ app.get('/clientes/:id/ingressos', (req, res) => {
     res.send(ingressosPorClienteId[req.params.id] || []);
 
 });
+
+app.delete("/clientes/:id/ingressos", (req, res, next) =>{
+    ingressos.forEach(ingresso =>{
+        if(ingresso.id === req.body.id){
+            const index  = ingressos.indexOf(ingresso);
+            ingressos.splice(index,1);
+        }
+    })
+    res.status(201).json(ingressos);
+});
 app.listen(5000, (() => {
-    console.log('Clientes. Porta 5000');
+    console.log('Ingressos. Porta 5000');
 }));
